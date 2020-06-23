@@ -5,10 +5,6 @@ const storage = multer.diskStorage({
     destination : 'api/uploads/',
     filename
 });
-const upload = multer({
-    fileFilter,
-    storage
-});
 
 function filename(request, file, callback) {
     callback(null, file.originalname);
@@ -22,11 +18,15 @@ function fileFilter(request, file, callback) {
     }
 }
 
+const upload = multer({
+    fileFilter,
+    storage
+});
 router.post('/upload', upload.single('photo'), (request, response) => {
     if(request.fileValidationError) {
         return response.status(400).json({error: request.fileValidationError});
     }
-    return response.status(201).json({success: ture});
+    return response.status(201).json({success: true});
 });
 
 
