@@ -24,9 +24,9 @@ function fileFilter(request, file, callback) {
 
 router.post('/upload', upload.single('photo'), (request, response) => {
     if(request.fileValidationError) {
-        response.status(400).json({error: request.fileValidationError});
+        return response.status(400).json({error: request.fileValidationError});
     }
-    response.status(201).json({success: ture});
+    return response.status(201).json({success: ture});
 });
 
 
