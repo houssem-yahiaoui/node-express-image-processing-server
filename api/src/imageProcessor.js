@@ -15,6 +15,7 @@ const imageProcessor = function (filename) {
 
     let resizeWorkerFinished = false;
     let monochromeWorkerFinished = false;
+    return new Promise((resolve, reject) => {
         if(!isMainThread) {
             reject(new Error('not on main thread'))
         } else {
