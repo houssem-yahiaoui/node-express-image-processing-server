@@ -15,13 +15,14 @@ function filename(request, file, callback) {
 }
 function fileFilter(request, file, callback) {
     if(file.mimeType !== 'image/png') {
+        req.fileValidationError = 'Wrong file type';
         callback(null, false, new Error('Wrong file type'));
     } else {
         callback(null, true);
     }
 }
 
-router.post('upload', upload.single('photo'), (request, response) => {
+router.post('/upload', upload.single('photo'), (request, response) => {
     if(request.fileValidationError) {
         response.status(400).json({error: request.fileValidationError});
     }
